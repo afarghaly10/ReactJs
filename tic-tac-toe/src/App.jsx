@@ -26,8 +26,16 @@ function App() {
 		gameBoard[rowIndex][cellIndex] = turn?.player;
 	});
 
+	let winner = null;
+
 	WINNING_COMBINATIONS.forEach((combination) => {
-		const [a, b, c] = combination;
+		const a = gameBoard[combination[0].row][combination[0].column];
+		const b = gameBoard[combination[1].row][combination[1].column];
+		const c = gameBoard[combination[2].row][combination[2].column];
+
+		if (a && a === b && a === c) {
+			winner = a;
+		}
 	});
 
 	const handleSelectSquare = (rowIndex, cellIndex) => {
@@ -62,6 +70,7 @@ function App() {
 						isActive={activePlayer === 'O'}
 					/>
 				</ol>
+				<h2>{winner ? `Player ${winner} wins!` : 'Tic Tac Toe'}</h2>
 				<GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
 			</div>
 			<Log gameTurn={gameTurns} />
