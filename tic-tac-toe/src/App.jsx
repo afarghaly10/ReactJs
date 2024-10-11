@@ -5,7 +5,11 @@ import Log from './components/Log';
 import { WINNING_COMBINATIONS } from '../winning-combinations';
 import GameOver from './components/GameOver';
 
-const initialGameBoard = [
+const PLAYERS = {
+	X: 'player 1',
+	O: 'player 2',
+};
+const INITIAL_BOARD_GAME = [
 	[null, null, null],
 	[null, null, null],
 	[null, null, null],
@@ -17,20 +21,7 @@ const deriveActivePlayer = (gameTurns) => {
 	return currentPlayer;
 };
 
-function App() {
-	const [gameTurns, setGameTurns] = useState([]);
-	const [playerName, setPlayerName] = useState({
-		x: 'player 1',
-		o: 'player 2',
-	});
-	const activePlayer = deriveActivePlayer(gameTurns);
-	let gameBoard = [...initialGameBoard.map((row) => [...row])];
-
-	gameTurns?.forEach((turn) => {
-		const { rowIndex, cellIndex } = turn?.square;
-		gameBoard[rowIndex][cellIndex] = turn?.player;
-	});
-
+const winCalculation = (gameBoard, playerName) => {
 	let winner = null;
 
 	WINNING_COMBINATIONS.forEach((combination) => {
@@ -39,10 +30,29 @@ function App() {
 		const c = gameBoard[combination[2].row][combination[2].column];
 
 		if (a && a === b && a === c) {
-			winner = playerName[a.toLowerCase()];
+			winner = playerName[a];
 		}
 	});
+	return winner;
+};
 
+const deriveGameBoard = (gameTurns) => {
+	const gameBoard = [...INITIAL_BOARD_GAME.map((row) => [...row])];
+
+	gameTurns.forEach((turn) => {
+		const { rowIndex, cellIndex } = turn.square;
+		gameBoard[rowIndex][cellIndex] = turn.player;
+	});
+
+	return gameBoard;
+};
+
+function App() {
+	const [gameTurns, setGameTurns] = useState([]);
+	const [playerName, setPlayerName] = useState(PLAYERS);
+	const activePlayer = deriveActivePlayer(gameTurns);
+	const gameBoard = deriveGameBoard(gameTurns);
+	const winner = winCalculation(gameBoard, playerName);
 	const isDraw = gameTurns.length === 9 && !winner;
 
 	const handleSelectSquare = (rowIndex, cellIndex) => {
@@ -67,7 +77,7 @@ function App() {
 	const handlePlayerNameChange = (symbol, name) => {
 		setPlayerName((prevPlayerName) => ({
 			...prevPlayerName,
-			[symbol.toLowerCase()]: name,
+			[symbol]: name,
 		}));
 	};
 
@@ -76,13 +86,13 @@ function App() {
 			<div id="game-container">
 				<ol id="players" className="highlight-player">
 					<Player
-						initialName="player 1"
+						initialName={PLAYERS.X}
 						symbol="X"
 						isActive={activePlayer === 'X'}
 						onNameChange={handlePlayerNameChange}
 					/>
 					<Player
-						initialName="player 2"
+						initialName={PLAYERS.O}
 						symbol="O"
 						isActive={activePlayer === 'O'}
 						onNameChange={handlePlayerNameChange}
