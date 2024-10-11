@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-export default function Player({ initialName, symbol, isActive }) {
+export default function Player({
+	initialName,
+	symbol,
+	isActive,
+	onNameChange,
+}) {
 	const [playerName, setPlayerName] = useState(initialName);
 	const [isEditing, setIsEditing] = useState(false);
 
-	const buttonName = isEditing ? "Save" : "Edit";
+	const buttonName = isEditing ? 'Save' : 'Edit';
 
 	const handleEditClick = () => {
 		setIsEditing((editing) => !editing);
+		if (isEditing) onNameChange(symbol, playerName);
 	};
 
 	const handleChange = (event) => {
@@ -15,7 +21,7 @@ export default function Player({ initialName, symbol, isActive }) {
 	};
 
 	return (
-		<li className={isActive ? "active" : undefined}>
+		<li className={isActive ? 'active' : undefined}>
 			<span className="player">
 				{!isEditing ? (
 					<span className="player-name">{playerName}</span>
