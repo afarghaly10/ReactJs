@@ -3,6 +3,7 @@ import Player from './components/Player';
 import GameBoard from './components/GameBoard';
 import Log from './components/Log';
 import { WINNING_COMBINATIONS } from '../winning-combinations';
+import GameOver from './components/GameOver';
 
 const initialGameBoard = [
 	[null, null, null],
@@ -38,6 +39,8 @@ function App() {
 		}
 	});
 
+	const isDraw = gameTurns.length === 9 && !winner;
+
 	const handleSelectSquare = (rowIndex, cellIndex) => {
 		setGameTurns((prevGameTurns) => {
 			let currentPlayer = deriveActivePlayer(prevGameTurns);
@@ -70,7 +73,7 @@ function App() {
 						isActive={activePlayer === 'O'}
 					/>
 				</ol>
-				<h2>{winner ? `Player ${winner} wins!` : 'Tic Tac Toe'}</h2>
+				{(winner || isDraw) && <GameOver winner={winner} />}
 				<GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
 			</div>
 			<Log gameTurn={gameTurns} />
