@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { EXAMPLES } from "../data.js";
-import TabButton from "./TabButton.jsx";
-import Section from "./Section.jsx";
-import Tabs from "./Tabs.jsx";
+import { useState } from 'react';
+import { EXAMPLES } from '../data.js';
+import TabButton from './TabButton.jsx';
+import Section from './Section.jsx';
+import Tabs from './Tabs.jsx';
 
 export default function Examples() {
 	const [selectedTab, setSelectedTab] = useState();
@@ -31,26 +31,26 @@ export default function Examples() {
 				buttons={
 					<>
 						<TabButton
-							isSelected={selectedTab === "components"}
-							onClick={() => handleTabSelect("components")}
+							isSelected={selectedTab === 'components'}
+							onClick={() => handleTabSelect('components')}
 						>
 							Components
 						</TabButton>
 						<TabButton
-							isSelected={selectedTab === "jsx"}
-							onClick={() => handleTabSelect("jsx")}
+							isSelected={selectedTab === 'jsx'}
+							onClick={() => handleTabSelect('jsx')}
 						>
 							JSX
 						</TabButton>
 						<TabButton
-							isSelected={selectedTab === "props"}
-							onClick={() => handleTabSelect("props")}
+							isSelected={selectedTab === 'props'}
+							onClick={() => handleTabSelect('props')}
 						>
 							Props
 						</TabButton>
 						<TabButton
-							isSelected={selectedTab === "state"}
-							onClick={() => handleTabSelect("state")}
+							isSelected={selectedTab === 'state'}
+							onClick={() => handleTabSelect('state')}
 						>
 							State
 						</TabButton>
