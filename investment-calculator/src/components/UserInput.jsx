@@ -1,22 +1,4 @@
-import { useState } from 'react';
-
-export default function UserInput() {
-	const [userInput, setUserInput] = useState({
-		initialInvestment: 10000,
-		annualInvestment: 1200,
-		expectedReturn: 4,
-		duration: 6,
-	});
-
-	const handleInputChange = (label, event) => {
-		setUserInput((prev) => {
-			return {
-				...prev,
-				[label]: event.target.value,
-			};
-		});
-	};
-
+export default function UserInput({ onInputChange, inputValues }) {
 	return (
 		<section id="user-input">
 			<div className="input-group">
@@ -24,8 +6,8 @@ export default function UserInput() {
 					<label>'Initial Investment':</label>
 					<input
 						type="number"
-						value={userInput.initialInvestment}
-						onChange={(event) => handleInputChange('initialInvestment', event)}
+						value={inputValues.initialInvestment}
+						onChange={(event) => onInputChange('initialInvestment', event)}
 						required
 					/>
 				</p>
@@ -33,8 +15,8 @@ export default function UserInput() {
 					<label>'Annual Investment':</label>
 					<input
 						type="number"
-						value={userInput.annualInvestment}
-						onChange={(event) => handleInputChange('annualInvestment', event)}
+						value={inputValues.annualInvestment}
+						onChange={(event) => onInputChange('annualInvestment', event)}
 						required
 					/>
 				</p>
@@ -44,8 +26,8 @@ export default function UserInput() {
 					<label>'Expected Return':</label>
 					<input
 						type="number"
-						value={userInput.expectedReturn}
-						onChange={(event) => handleInputChange('expectedReturn', event)}
+						value={inputValues.expectedReturn}
+						onChange={(event) => onInputChange('expectedReturn', event)}
 						required
 					/>
 				</p>
@@ -53,8 +35,8 @@ export default function UserInput() {
 					<label>'Duration':</label>
 					<input
 						type="number"
-						value={userInput.duration}
-						onChange={(event) => handleInputChange('duration', event)}
+						value={inputValues.duration}
+						onChange={(event) => onInputChange('duration', event)}
 						required
 					/>
 				</p>
