@@ -6,16 +6,16 @@ import ResultsTable from './components/ResultsTable';
 function App() {
 	const [userInput, setUserInput] = useState({
 		initialInvestment: 10000,
-		annualInvestment: 1200,
-		expectedReturn: 4,
-		duration: 6,
+		annualInvestment: 300,
+		expectedReturn: 5.5,
+		duration: 12,
 	});
 
 	const handleInputChange = (label, event) => {
 		setUserInput((prev) => {
 			return {
 				...prev,
-				[label]: event.target.value,
+				[label]: +event.target.value,
 			};
 		});
 	};
@@ -25,7 +25,7 @@ function App() {
 			<Header />
 			<main>
 				<UserInput inputValues={userInput} onInputChange={handleInputChange} />
-				<ResultsTable />
+				<ResultsTable investmentData={userInput} />
 			</main>
 		</>
 	);
