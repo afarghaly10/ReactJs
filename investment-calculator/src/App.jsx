@@ -11,6 +11,8 @@ function App() {
 		duration: 12,
 	});
 
+	const isValidInput = userInput.duration > 0;
+
 	const handleInputChange = (label, event) => {
 		setUserInput((prev) => {
 			return {
@@ -25,7 +27,11 @@ function App() {
 			<Header />
 			<main>
 				<UserInput inputValues={userInput} onInputChange={handleInputChange} />
-				<ResultsTable investmentData={userInput} />
+				{isValidInput ? (
+					<ResultsTable investmentData={userInput} />
+				) : (
+					<h3 className="center">Duration must be greater than 0</h3>
+				)}
 			</main>
 		</>
 	);
