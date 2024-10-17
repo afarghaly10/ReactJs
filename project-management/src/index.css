@@ -1,3 +1,12 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Handjet:wght@400;700&display=swap'); */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+	/* Taken from SVGBackgrounds.com */
+	background-color: #111422;
+	background-attachment: fixed;
+	background-size: cover;
+	color: lavender;
+}
