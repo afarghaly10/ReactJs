@@ -36,7 +36,6 @@ export default function TimerChallenge({ title, targetTime }) {
 		<>
 			<ResultModal
 				ref={dialog}
-				result={isActiveTimer ? 'failed' : 'success'}
 				targetTime={targetTime}
 				onRestart={handleReset}
 				remainingTime={timeRemaining}
