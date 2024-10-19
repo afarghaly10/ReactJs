@@ -7,7 +7,7 @@ export default function NewProject({ onAdd, ...props }) {
 	const dueDateRef = useRef();
 
 	const handleSave = () => {
-		const title = titleRef.current.value;
+		const title = ` ${titleRef.current.value}`;
 		const description = descriptionRef.current.value;
 		const dueDate = dueDateRef.current.value;
 
