@@ -19,7 +19,12 @@ export default function NewTask({ onAdd }) {
 				onChange={handleTaskInput}
 				value={taskInput}
 			/>
-			<button className="bg-gray-600/50 hover:bg-gray-600/20">💾</button>
+			<button
+				className="bg-gray-600/50 hover:bg-gray-600/20"
+				onClick={handleSaveTask}
+			>
+				💾
+			</button>
 		</div>
 	);
 }
