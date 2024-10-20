@@ -8,6 +8,7 @@ function App() {
 	const [projects, setProjects] = useState({
 		selectedProjectId: undefined,
 		projects: [],
+		tasks: [],
 	});
 
 	const handleAddNewProject = (project) => {
@@ -18,6 +19,10 @@ function App() {
 			};
 		});
 	};
+
+	const handleAddTask = (task) => {};
+
+	const handleDeleteTask = (taskId) => {};
 
 	const handleSaveNewProject = (project) => {
 		setProjects((prevProjects) => {

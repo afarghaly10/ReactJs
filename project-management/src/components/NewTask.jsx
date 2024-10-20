@@ -6,6 +6,10 @@ export default function NewTask() {
 	const handleTaskInput = (e) => {
 		setTaskInput(e.target.value);
 	};
+
+	const handleSaveTask = () => {
+		setTaskInput('');
+	};
 	return (
 		<div className="flex items-center gap-4">
 			<input
