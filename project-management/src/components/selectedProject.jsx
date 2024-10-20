@@ -28,7 +28,7 @@ export default function selectedProject({
 						</button>
 					</div>
 					<p className="mb-6 mt-1 text-[#9aa2cb]">{formattedDate}</p>
-					<p className="text-[#3cec85] whitespace-pre-wrap">
+					<p className="text-[#EACD61] whitespace-pre-wrap">
 						{project.description}
 					</p>
 				</header>
