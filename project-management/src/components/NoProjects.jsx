@@ -3,7 +3,7 @@ import Button from './Button';
 
 export default function NoProjects({ onAddProject }) {
 	return (
-		<div className="w-2/3 mt-24 text-center text-white">
+		<div className="w-2/3 mt-24 text-center ">
 			<img
 				src={logo}
 				alt="NoProjects"
