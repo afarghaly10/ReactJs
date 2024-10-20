@@ -1,6 +1,11 @@
 import Button from './Button';
 
-export default function Sidebar({ onAddProject, projectsList }) {
+export default function Sidebar({
+	onAddProject,
+	projectsList,
+	onSelectProject,
+	selectedProjectId,
+}) {
 	const emoji = [
 		'🚀',
 		'🌟',
@@ -57,14 +62,25 @@ export default function Sidebar({ onAddProject, projectsList }) {
 				<Button onClick={onAddProject}>+ Add Project</Button>
 			</div>
 			<ul className="mt-8">
-				{projectsList.map((project) => (
-					<li key={projectsList}>
-						<button className="w-full px-2 py-1 my-1 text-left rounded-sm hover:text-black hover:bg-gray-600">
-							{emoji[Math.floor(Math.random() * emoji.length)]}
-							{project.title}
-						</button>
-					</li>
-				))}
+				{projectsList.map((project) => {
+					let cssClasses =
+						'w-full px-2 py-1 my-1 text-left rounded-sm hover:text-[#B78AFF] hover:bg-gray-600/50';
+
+					if (project.id === selectedProjectId) {
+						cssClasses += ' bg-gray-600 text-[#F38CEC] ';
+					} else {
+						cssClasses += ' text-[#EACD61] ';
+					}
+
+					return (
+						<li key={projectsList}>
+							<button className={cssClasses} onClick={onSelectProject}>
+								{emoji[Math.floor(Math.random() * emoji.length)]}
+								{project.title}
+							</button>
+						</li>
+					);
+				})}
 			</ul>
 		</aside>
 	);

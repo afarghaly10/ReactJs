@@ -29,8 +29,8 @@ export default function NewProject({ onSave, onCancel, ...props }) {
 		<>
 			<Modal ref={modalRef} buttonCaption="Close">
 				<h2 className="my-4 text-xl font-bold">Invalid Input</h2>
-				<p className="mb-4 text-stone-400">Missing Values.</p>
-				<p className="mb-4 text-stone-400">
+				<p className="mb-4 text-[#3cec85]">Missing Values.</p>
+				<p className="mb-4 text-[#3cec85]">
 					Please ensure you have filled all input fields.
 				</p>
 			</Modal>
@@ -46,7 +46,7 @@ export default function NewProject({ onSave, onCancel, ...props }) {
 					</li>
 					<li>
 						<button
-							className="px-6 py-2 text-xs rounded-md md:text-base bg-gray-600/50 hover:bg-gray-600/20 text-[#69C3FF]"
+							className="px-6 py-2 text-xs rounded-md md:text-base bg-gray-600/50 hover:bg-gray-600/20 text-[#F38CEC]"
 							onClick={handleSave}
 						>
 							Save
