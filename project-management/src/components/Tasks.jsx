@@ -15,7 +15,7 @@ export default function Tasks({ tasks, onAdd, onDelete }) {
 						return (
 							<li key={task.id} className="flex justify-between my-4">
 								<span>{task.text}</span>
-								<button>
+								<button onClick={() => onDelete(task.id)}>
 									<img
 										src={deleteButton}
 										alt="Delete"
