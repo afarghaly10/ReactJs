@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function NewTask() {
+export default function NewTask({ onAdd }) {
 	const [taskInput, setTaskInput] = useState();
 
 	const handleTaskInput = (e) => {
@@ -8,6 +8,7 @@ export default function NewTask() {
 	};
 
 	const handleSaveTask = () => {
+		onAdd(taskInput);
 		setTaskInput('');
 	};
 	return (
