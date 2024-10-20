@@ -74,7 +74,10 @@ export default function Sidebar({
 
 					return (
 						<li key={projectsList}>
-							<button className={cssClasses} onClick={onSelectProject}>
+							<button
+								className={cssClasses}
+								onClick={() => onSelectProject(project.id)}
+							>
 								{emoji[Math.floor(Math.random() * emoji.length)]}
 								{project.title}
 							</button>
