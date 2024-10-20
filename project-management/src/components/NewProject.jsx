@@ -2,7 +2,7 @@ import Input from './Input';
 import { useRef } from 'react';
 import Modal from './Modal';
 
-export default function NewProject({ onAdd, ...props }) {
+export default function NewProject({ onSave, onCancel, ...props }) {
 	const modalRef = useRef();
 	const titleRef = useRef();
 	const descriptionRef = useRef();
@@ -14,10 +14,6 @@ export default function NewProject({ onAdd, ...props }) {
 		const dueDate = dueDateRef.current.value;
 
 		// validation
-
-		console.log('----------------------------');
-		console.log(`title: >> `, title);
-		console.log('----------------------------');
 		if (
 			title.trim() === '' ||
 			description.trim() === '' ||
@@ -26,7 +22,7 @@ export default function NewProject({ onAdd, ...props }) {
 			modalRef.current.open();
 			return;
 		}
-		onAdd({ title, description, dueDate });
+		onSave({ title, description, dueDate });
 	};
 
 	return (
@@ -41,11 +37,16 @@ export default function NewProject({ onAdd, ...props }) {
 			<div className="w-[35rem] mt-16">
 				<menu className="flex items-center justify-end gap-4 my-4">
 					<li>
-						<button className=" hover:text-red-700">Cancel</button>
+						<button
+							className=" hover:text-red-700 text-[#FF738A]"
+							onClick={onCancel}
+						>
+							Cancel
+						</button>
 					</li>
 					<li>
 						<button
-							className="px-6 py-2 text-xs rounded-md md:text-base bg-gray-600/50 hover:bg-gray-600/20"
+							className="px-6 py-2 text-xs rounded-md md:text-base bg-gray-600/50 hover:bg-gray-600/20 text-[#69C3FF]"
 							onClick={handleSave}
 						>
 							Save
