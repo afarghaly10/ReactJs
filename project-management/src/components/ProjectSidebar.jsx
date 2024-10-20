@@ -67,7 +67,7 @@ export default function Sidebar({
 						'w-full px-2 py-1 my-1 text-left rounded-sm hover:text-[#B78AFF] hover:bg-gray-600/50';
 
 					if (project.id === selectedProjectId) {
-						cssClasses += ' bg-gray-600 text-[#EACD61] ';
+						cssClasses += ' bg-gray-600 text-[#FF955C] ';
 					} else {
 						cssClasses += ' text-[#F38CEC] ';
 					}

@@ -1,13 +1,14 @@
 import { useState } from 'react';
 
 export default function NewTask({ onAdd }) {
-	const [taskInput, setTaskInput] = useState();
+	const [taskInput, setTaskInput] = useState('');
 
 	const handleTaskInput = (e) => {
 		setTaskInput(e.target.value);
 	};
 
 	const handleSaveTask = () => {
+		if (!taskInput.trim()) return;
 		onAdd(taskInput);
 		setTaskInput('');
 	};
