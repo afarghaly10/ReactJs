@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	/* Taken from SVGBackgrounds.com */
+	background-color: #111422;
+	/* background-color: rgb(224, 226, 231); */
+	background-attachment: fixed;
+	background-size: cover;
+	color: #3cec85;
+}

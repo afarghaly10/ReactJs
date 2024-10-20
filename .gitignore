@@ -12,6 +12,9 @@ yarn-error.log*
 # DS Store files
 .DS_Store
 
+# vscode directory
+/.vscode
+
 # dependencies
 /node_modules
 
