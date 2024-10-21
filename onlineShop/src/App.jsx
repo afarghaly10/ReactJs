@@ -74,14 +74,11 @@ function App() {
 
 	return (
 		<CartContext.Provider value={contextValue}>
-			<Header
-				cart={shoppingCart}
-				onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
-			/>
+			<Header />
 			<Shop>
 				{DUMMY_PRODUCTS.map((product) => (
 					<li key={product.id}>
-						<Product {...product} onAddToCart={contextValue} />
+						<Product {...product} />
 					</li>
 				))}
 			</Shop>
