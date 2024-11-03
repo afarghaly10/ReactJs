@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { log } from '../../log';
 
 const ConfigureCounter = ({ setCount }) => {
+	log('<ConfigureCounter /> rendered', 1);
 	const [enteredNumber, setEnteredNumber] = useState(0);
 
 	function handleChange(event) {

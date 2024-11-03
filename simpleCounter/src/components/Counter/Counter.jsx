@@ -23,7 +23,7 @@ function isPrime(number) {
 	return true;
 }
 
-export default memo(function Counter({ initialCount }) {
+export default function Counter({ initialCount }) {
 	log('<Counter /> rendered', 1);
 	const initialCountIsPrime = isPrime(initialCount);
 
@@ -54,4 +54,4 @@ export default memo(function Counter({ initialCount }) {
 			</p>
 		</section>
 	);
-});
+}
