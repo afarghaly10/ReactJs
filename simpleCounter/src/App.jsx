@@ -6,22 +6,24 @@ import { log } from './log.js';
 import ConfigureCounter from './components/Counter/ConfigureCounter.jsx';
 
 function App() {
-	log('<App /> rendered');
-	const [chosenCount, setChosenCount] = useState(0);
+  log('<App /> rendered');
 
-	const handleSetCount = (num) => {
-		setChosenCount(num);
-	};
+  const [chosenCount, setChosenCount] = useState(0);
 
-	return (
-		<>
-			<Header />
-			<main>
-				<ConfigureCounter setCount={handleSetCount} />
-				<Counter initialCount={chosenCount} />
-			</main>
-		</>
-	);
+  function handleSetCount(newCount) {
+    setChosenCount(newCount);
+  }
+
+  return (
+    <>
+      <Header />
+      <main>
+        <ConfigureCounter onSet={handleSetCount} />
+        <Counter key={chosenCount} initialCount={chosenCount} />
+        <Counter initialCount={0} />
+      </main>
+    </>
+  );
 }
 
 export default App;
