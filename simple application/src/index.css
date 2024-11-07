@@ -1,122 +1,180 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Lato:wght@400;700&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
-html {
-  font-family: "Quicksand", sans-serif;
-  line-height: 1.5;
-
-  color: #ebe7ef;
-  background: radial-gradient(#280a48, #20043d);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+body {
+  margin: 0;
+  font-family: 'Lato', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-  min-height: 80rem;
+  background: linear-gradient(#222c31, #111d32);
+  color: #d9e2f1;
+  min-height: 100vh;
+  font-family: 'Quicksand', sans-serif;
+}
+
+#main-header {
+  margin: 2rem auto;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  color: #87a7a4;
+}
+
+#main-header img {
+  width: 6rem;
+  height: 6rem;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(14, 26, 28, 0.8));
+}
+
+#main-header h1 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  letter-spacing: 0.15rem;
 }
 
 main {
   width: 90%;
   max-width: 50rem;
-  margin: auto;
+  margin: 2rem auto;
 }
 
-#core-concepts {
-  padding: 2rem;
+section {
+  margin: 2rem 0;
+}
+
+#configure-counter {
+  margin: 0 auto;
+  padding: 0;
+  border: 1px solid #05827e;
   border-radius: 6px;
-  background-color: #140524;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-}
-
-main h2 {
   text-align: center;
-  font-family: "Roboto Condensed", sans-serif;
-  margin: 0 0 1.5rem 0;
-  color: #a18aba;
-}
-
-#core-concepts ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-#core-concepts li {
-  width: 10rem;
-  text-align: center;
-}
-
-#core-concepts li img {
-  height: 4rem;
-  width: 6rem;
-  object-fit: cover;
-}
-
-#core-concepts li h3 {
-  margin: 0.5rem 0;
-}
-
-#core-concepts li p {
-  font-size: 0.9rem;
-}
-
-#examples {
-  margin: 3rem auto;
-}
-
-#examples h2 {
-  text-align: left;
-}
-
-#examples menu {
-  margin: 1rem 0;
-  padding: 0;
   display: flex;
   gap: 0.5rem;
-  list-style: none;
-}
-
-#examples menu button {
-  padding: 0.5rem 1rem;
+  align-items: center;
+  justify-content: center;
   border: none;
-  border-radius: 6px;
-  background-color: transparent;
-  color: #a18aba;
-  font-family: "Roboto Condensed", sans-serif;
+}
+
+#configure-counter h2 {
+  margin: 0.5rem;
   font-size: 1rem;
+  font-weight: bold;
+  color: #88dbd6;
+}
+
+#configure-counter input {
+  width: 4rem;
+  text-align: center;
+  margin: 0.5rem;
+  padding: 0.5rem 0.25rem;
+  border: 1px solid #88dbd6;
+  border-radius: 4px;
+  background-color: #0e1a1c;
+  color: #88dbd6;
+  font-size: 1rem;
+}
+
+#configure-counter input::-webkit-outer-spin-button,
+#configure-counter input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+#configure-counter input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+#configure-counter button {
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  background: transparent;
+  color: #96d8d6;
+  border: none;
 }
 
-#examples menu button:hover {
-  background-color: #1b082f;
-  color: #ebe7ef;
+#configure-counter button:hover {
+  color: #16f3eb;
 }
 
-#examples menu button.active {
-  background-color: #18082a;
-  color: #ebe7ef;
-}
-
-#tab-content {
-  padding: 1rem;
+.counter {
+  padding: 2rem;
+  border: 1px solid #05827e;
   border-radius: 6px;
-  background-color: #2f1d43;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-#tab-content h3 {
-  margin: 0;
+.counter p {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  font-size: 1.5rem;
 }
 
-#tab-content code {
-  font-size: 1rem;
+.counter .counter-info {
+  display: block;
+  font-size: 0.8rem;
+  color: #9dc5c4;
+  text-align: center;
+}
+
+.counter-output {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #b5dad7;
+}
+
+.counter-output.negative {
+  color: #f3a6a6;
+}
+
+.counter ol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.counter li {
+  width: 2rem;
+  margin-left: 0.5rem;
+  color: #8eb6b3;
+  padding: 0.2rem;
+}
+
+.counter li:first-child {
+  color: #87f0e9;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.counter li.selected {
+  background-color: #335453;
+  color: #d9f7f6;
+  border-radius: 4px;
+}
+
+.button {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #16f3eb;
+  color: #051a19;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.button-icon {
+  color: #051a19;
+  height: 0.9rem;
 }
