@@ -36,6 +36,9 @@ app.get('/user-places', async (req, res) => {
 
 app.put('/user-places', async (req, res) => {
   const places = req.body.places;
+  console.log('----------------------------');
+  console.log(`req.body: >> `, req.body);
+  console.log('----------------------------');
 
   await fs.writeFile('./data/user-places.json', JSON.stringify(places));
 

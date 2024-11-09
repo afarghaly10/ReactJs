@@ -2,9 +2,20 @@ import { useState, useEffect } from 'react';
 import Places from './Places.jsx';
 import ErrorPage from '../shared/Error.jsx';
 import { sortPlacesByDistance } from '../loc.js';
+import { fetchAvailablePlaces } from '../api.js';
 
-const apiUrl = 'http://localhost:3000';
+let sortedPlaces = navigator.geolocation.getCurrentPosition((position) => {
+	const latitude = position.coords.latitude
+		? position.coords.latitude
+		: 37.7749;
 
+	const longitude = position.coords.longitude
+		? position.coords.longitude
+		: -122.4194;
+
+	// sort places by distance
+	return sortPlacesByDistance(places, latitude, longitude);
+});
 export default function AvailablePlaces({ onSelectPlace }) {
 	const [places, setPlaces] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -14,27 +25,9 @@ export default function AvailablePlaces({ onSelectPlace }) {
 		setIsLoading(true);
 		const getPlaces = async () => {
 			try {
-				const response = await fetch(`${apiUrl}/places`);
-				if (!response.ok) {
-					throw new Error(data.message || 'Failed to fetch places.');
-				}
+				const places = await fetchAvailablePlaces();
 
-				// destructuring places from response.json()
-				const { places } = await response.json();
-
-				let sortedPlaces =
-					navigator.geolocation.getCurrentPosition((position) => {
-						const latitude = position.coords.latitude
-							? position.coords.latitude
-							: 37.7749;
-
-						const longitude = position.coords.longitude
-							? position.coords.longitude
-							: -122.4194;
-
-						// sort places by distance
-						return sortPlacesByDistance(places, latitude, longitude);
-					}) || places;
+				sortedPlaces = sortedPlaces || places;
 				setPlaces(sortedPlaces);
 				setIsLoading(false);
 			} catch (error) {
