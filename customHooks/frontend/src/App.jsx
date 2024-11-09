@@ -18,7 +18,7 @@ function App() {
 	const {
 		isLoading,
 		error,
-		userPlaces: userPlaces,
+		apiData: userPlaces,
 		setApiData: setUserPlaces,
 	} = useFetch(getUserPlaces, []);
 
