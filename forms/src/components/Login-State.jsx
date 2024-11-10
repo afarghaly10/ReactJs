@@ -18,12 +18,21 @@ export default function Login() {
 		password: '',
 	});
 
-	const isInvalidEmail = formData.email !== '' && !formData.email.includes('@');
+	const [didEdit, setDidEdit] = useState({
+		email: false,
+		password: false,
+	});
+
+	const isInvalidEmail = didEdit.email && !formData.email.includes('@');
 
 	const handleFormChange = (identifier, value) => {
 		setFormData((prevState) => ({
 			...prevState,
 			[identifier]: value,
+		}));
+		setDidEdit((prevState) => ({
+			...prevState,
+			[identifier]: false,
 		}));
 	};
 
@@ -32,6 +41,13 @@ export default function Login() {
 		console.log('----------------------------');
 		console.log(`submitted: >> `);
 		console.log('----------------------------');
+	};
+
+	const handleInputBlur = (identifier, event) => {
+		setDidEdit((prevState) => ({
+			...prevState,
+			[identifier]: true,
+		}));
 	};
 
 	return (
@@ -45,6 +61,7 @@ export default function Login() {
 						id="email"
 						type="email"
 						name="email"
+						onBlur={(event) => handleInputBlur('email', event)}
 						onChange={(event) => handleFormChange('email', event.target.value)}
 						value={formData.email}
 					/>
