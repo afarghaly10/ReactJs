@@ -18,6 +18,8 @@ export default function Login() {
 		password: '',
 	});
 
+	const isValidEmail = formData.email.includes('@');
+
 	const handleFormChange = (identifier, value) => {
 		setFormData((prevState) => ({
 			...prevState,
@@ -46,6 +48,9 @@ export default function Login() {
 						onChange={(event) => handleFormChange('email', event.target.value)}
 						value={formData.email}
 					/>
+					<div className="control-error">
+						{!isValidEmail && <p>Please Enter a valid Email</p>}
+					</div>
 				</div>
 
 				<div className="control no-margin">
