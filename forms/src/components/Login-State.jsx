@@ -18,7 +18,7 @@ export default function Login() {
 		password: '',
 	});
 
-	const isValidEmail = formData.email.includes('@');
+	const isInvalidEmail = formData.email !== '' && !formData.email.includes('@');
 
 	const handleFormChange = (identifier, value) => {
 		setFormData((prevState) => ({
@@ -49,7 +49,7 @@ export default function Login() {
 						value={formData.email}
 					/>
 					<div className="control-error">
-						{!isValidEmail && <p>Please Enter a valid Email</p>}
+						{isInvalidEmail && <p>Please Enter a valid Email</p>}
 					</div>
 				</div>
 
