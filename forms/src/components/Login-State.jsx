@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Input from './Input';
 
 export default function Login() {
 	// handling data in separate states
@@ -24,6 +25,8 @@ export default function Login() {
 	});
 
 	const isInvalidEmail = didEdit.email && !formData.email.includes('@');
+	const isInvalidPassword =
+		didEdit.password && formData.password.trim().length < 8;
 
 	const handleFormChange = (identifier, value) => {
 		setFormData((prevState) => ({
@@ -55,33 +58,25 @@ export default function Login() {
 			<h2>Login</h2>
 
 			<div className="control-row">
-				<div className="control no-margin">
-					<label htmlFor="email">Email</label>
-					<input
-						id="email"
-						type="email"
-						name="email"
-						onBlur={(event) => handleInputBlur('email', event)}
-						onChange={(event) => handleFormChange('email', event.target.value)}
-						value={formData.email}
-					/>
-					<div className="control-error">
-						{isInvalidEmail && <p>Please Enter a valid Email</p>}
-					</div>
-				</div>
+				<Input
+					label="Email"
+					id="email"
+					type="email"
+					error={isInvalidEmail && 'Please Enter a valid Email'}
+					value={formData.email}
+					onChange={(event) => handleFormChange('email', event.target.value)}
+					onBlur={(event) => handleInputBlur('email', event)}
+				/>
 
-				<div className="control no-margin">
-					<label htmlFor="password">Password</label>
-					<input
-						id="password"
-						type="password"
-						name="password"
-						onChange={(event) =>
-							handleFormChange('password', event.target.value)
-						}
-						value={formData.password}
-					/>
-				</div>
+				<Input
+					label="Password"
+					id="password"
+					type="password"
+					value={formData.password}
+					onChange={(event) => handleFormChange('password', event.target.value)}
+					onBlur={(event) => handleInputBlur('password', event)}
+					error={isInvalidPassword && 'Password must be at least 8 characters'}
+				/>
 			</div>
 
 			<p className="form-actions">
