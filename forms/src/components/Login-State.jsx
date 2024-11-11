@@ -1,58 +1,31 @@
-import { useState } from 'react';
 import Input from './Input';
 import { isEmail, isNotEmpty, hasMinLength } from '../util/validation';
+import { useInput } from '../hooks/useInput';
 
 export default function Login() {
-	// handling data in separate states
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+	const {
+		value: emailValue,
+		handleFormChange: handleEmailChange,
+		handleInputBlur: handleEmailBlur,
+		hasError: isInvalidEmail,
+	} = useInput('', (value) => isNotEmpty(value) && isEmail(value));
 
-	const handleEmailChange = (event) => {
-		setEmail(event.target.value);
-	};
-	const handlePasswordChange = (event) => {
-		setPassword(event.target.value);
-	};
-
-	// handle data in a single state
-	const [formData, setFormData] = useState({
-		email: '',
-		password: '',
-	});
-
-	const [didEdit, setDidEdit] = useState({
-		email: false,
-		password: false,
-	});
-
-	const isInvalidEmail =
-		didEdit.email && !isEmail(formData.email) && !isNotEmpty(formData.email);
-	const isInvalidPassword =
-		didEdit.password && !hasMinLength(formData.password, 8);
-
-	const handleFormChange = (identifier, value) => {
-		setFormData((prevState) => ({
-			...prevState,
-			[identifier]: value,
-		}));
-		setDidEdit((prevState) => ({
-			...prevState,
-			[identifier]: false,
-		}));
-	};
+	const {
+		value: passwordValue,
+		handleFormChange: handlePasswordChange,
+		handleInputBlur: handlePasswordBlur,
+		hasError: isInvalidPassword,
+	} = useInput('', (value) => isNotEmpty(value) && hasMinLength(value, 8));
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
+		if (isInvalidEmail || isInvalidPassword) {
+			return;
+		}
 		console.log('----------------------------');
 		console.log(`submitted: >> `);
 		console.log('----------------------------');
-	};
-
-	const handleInputBlur = (identifier, event) => {
-		setDidEdit((prevState) => ({
-			...prevState,
-			[identifier]: true,
-		}));
 	};
 
 	return (
@@ -65,18 +38,18 @@ export default function Login() {
 					id="email"
 					type="email"
 					error={isInvalidEmail && 'Please Enter a valid Email'}
-					value={formData.email}
-					onChange={(event) => handleFormChange('email', event.target.value)}
-					onBlur={(event) => handleInputBlur('email', event)}
+					value={emailValue}
+					onChange={handleEmailChange}
+					onBlur={handleEmailBlur}
 				/>
 
 				<Input
 					label="Password"
 					id="password"
 					type="password"
-					value={formData.password}
-					onChange={(event) => handleFormChange('password', event.target.value)}
-					onBlur={(event) => handleInputBlur('password', event)}
+					value={passwordValue}
+					onChange={handlePasswordChange}
+					onBlur={handlePasswordBlur}
 					error={isInvalidPassword && 'Password must be at least 8 characters'}
 				/>
 			</div>
