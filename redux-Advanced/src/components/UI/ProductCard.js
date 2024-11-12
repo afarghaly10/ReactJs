@@ -8,10 +8,7 @@ const Card = (props) => {
 		<section
 			className={`${classes.card} ${props.className ? props.className : ''}`}
 		>
-			<div>{props.children}</div>
-			<div>
-				<h2>Total : $ {totalPrice?.toFixed(2) || 0} </h2>
-			</div>
+			{props.children}
 		</section>
 	);
 };
