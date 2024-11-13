@@ -5,19 +5,16 @@ const {
 	increment,
 	decrement,
 	removeFromCart,
+  addToCart,
 } = cartActions;
 
 const CartItem = (props) => {
 	const { id, title, quantity, total, price } = props.item;
 	const dispatch = useDispatch();
 
-	const incrementHandler = () => {
-		dispatch(increment(id));
-	};
-
-	const decrementHandler = () => {
-		dispatch(decrement(id));
-	};
+  const addToCartHandler = () => {
+    dispatch(addToCart(props.item));
+  }
 
 	const removeItemHandler = () => {
 		dispatch(removeFromCart(id));
@@ -38,11 +35,11 @@ const CartItem = (props) => {
 				</div>
 				<div className={classes.actions}>
 					<button
-						onClick={quantity === 1 ? removeItemHandler : decrementHandler}
+						onClick={removeItemHandler}
 					>
 						-
 					</button>
-					<button onClick={incrementHandler}>+</button>
+					<button onClick={addToCartHandler}>+</button>
 				</div>
 			</div>
 		</li>

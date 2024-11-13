@@ -6,18 +6,6 @@ const cartSlice = createSlice({
 	name: 'cart',
 	initialState: initialCartState,
 	reducers: {
-		increment(state, action) {
-			const itemId = action.payload;
-			const item = state.items.find((item) => item.id === itemId);
-			item.quantity++;
-			item.total = item.total + item.price;
-		},
-		decrement(state, action) {
-			const itemId = action.payload;
-			const item = state.items.find((item) => item.id === itemId);
-			item.quantity--;
-			item.total = item.total - item.price;
-		},
 		toggleCart(state) {
 			state.showCart = !state.showCart;
 		},

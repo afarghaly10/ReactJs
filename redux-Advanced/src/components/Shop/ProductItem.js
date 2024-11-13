@@ -11,7 +11,6 @@ const ProductItem = (props) => {
     id: Number(id),
     title,
     price: Number(price),
-    description
   };
 
   const addToCartHandler = () => {
