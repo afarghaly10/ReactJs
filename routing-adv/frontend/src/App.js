@@ -7,11 +7,12 @@ import {
 import HomePage from './pages/HomePage';
 import EventsPage, { loader as eventsLoader } from './pages/Events';
 import EventDetailPage, { EventDetailLoader, deleteEventAction } from './pages/EventDetail';
-import NewEventPage, { newEventAction } from './pages/NewEventPage';
+import NewEventPage from './pages/NewEventPage';
 import EditEventPage from './pages/EditEventPage';
 import RootLayout from './pages/RootLayout';
 import EventLayout from './pages/EventLayout';
 import ErrorPage from './pages/ErrorPage';
+import { eventAction } from './components/EventForm';
 
 const router = createBrowserRouter([
 	{
@@ -39,10 +40,10 @@ const router = createBrowserRouter([
 								element: <EventDetailPage />,
 								action: deleteEventAction,
 							},
-							{ path: 'edit', element: <EditEventPage /> },
+							{ path: 'edit', element: <EditEventPage />, action: eventAction },
 						],
 					},
-					{ path: 'new', element: <NewEventPage />, action: newEventAction },
+					{ path: 'new', element: <NewEventPage />, action: eventAction },
 				],
 			},
 		],

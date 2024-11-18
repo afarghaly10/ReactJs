@@ -1,15 +1,34 @@
-import { useNavigate, Form } from 'react-router-dom';
+import {
+	useNavigate,
+	Form,
+	useNavigation,
+	useActionData,
+  json,
+  redirect,
+} from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 
 function EventForm({ method, event }) {
 	const navigate = useNavigate();
+	const navigation = useNavigation();
+	const actionData = useActionData();
+
+	const isSubmitting = navigation.action === 'submitting';
+
 	function cancelHandler() {
 		navigate('..');
 	}
 
 	return (
-		<Form method='post' className={classes.form}>
+		<Form method={method} className={classes.form}>
+			{actionData && actionData.errors && (
+				<ul>
+					{Object.values(actionData.errors).map((error) => (
+						<li key={error}>{error}</li>
+					))}
+				</ul>
+			)}
 			<p>
 				<label htmlFor="title">Title</label>
 				<input
@@ -51,13 +70,45 @@ function EventForm({ method, event }) {
 				/>
 			</p>
 			<div className={classes.actions}>
-				<button type="button" onClick={cancelHandler}>
+				<button type="button" onClick={cancelHandler} disabled={isSubmitting}>
 					Cancel
 				</button>
-				<button>Save</button>
+				<button disabled={isSubmitting}>Save</button>
 			</div>
 		</Form>
 	);
 }
 
 export default EventForm;
+
+export const eventAction = async ({ request, params }) => {
+	const method = request.method;
+	const data = await request.formData();
+	const eventData = {
+		title: data.get('title'),
+		description: data.get('description'),
+		date: data.get('date'),
+		image: data.get('image'),
+	};
+
+	let url = 'http://localhost:8080/events';
+
+	if (method === 'PATCH') url += `/${params.eventId}`;
+
+	const response = await fetch(url, {
+		method,
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(eventData),
+	});
+
+	if (response.status === 422) {
+		return response;
+	}
+
+	if (!response.ok) {
+		throw json({ message: 'Failed to create event' }, { status: 500 });
+	}
+	return redirect('/events');
+};
