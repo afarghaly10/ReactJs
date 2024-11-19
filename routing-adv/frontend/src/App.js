@@ -13,6 +13,7 @@ import RootLayout from './pages/RootLayout';
 import EventLayout from './pages/EventLayout';
 import ErrorPage from './pages/ErrorPage';
 import { eventAction } from './components/EventForm';
+import NewsletterPage, { action as newsletterAction } from './pages/Newsletter';
 
 const router = createBrowserRouter([
 	{
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
 		element: <RootLayout />,
 		errorElement: <ErrorPage />,
 		children: [
-			{ index: true, element: <HomePage /> }, // path: '' is the default route
+			{ index: true, element: <HomePage /> },
 			{
 				path: 'events',
 				element: <EventLayout />,
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
 					},
 					{
 						path: ':eventId',
-						id: 'eventDetail',
+						id: 'event-detail',
 						loader: EventDetailLoader,
 						children: [
 							{
@@ -40,15 +41,29 @@ const router = createBrowserRouter([
 								element: <EventDetailPage />,
 								action: deleteEventAction,
 							},
-							{ path: 'edit', element: <EditEventPage />, action: eventAction },
+							{
+								path: 'edit',
+								element: <EditEventPage />,
+								action: eventAction,
+							},
 						],
 					},
-					{ path: 'new', element: <NewEventPage />, action: eventAction },
+					{
+						path: 'new',
+						element: <NewEventPage />,
+						action: eventAction,
+					},
 				],
+			},
+			{
+				path: 'newsletter',
+				element: <NewsletterPage />,
+				action: newsletterAction,
 			},
 		],
 	},
 ]);
+
 function App() {
 	return <RouterProvider router={router} />;
 }
