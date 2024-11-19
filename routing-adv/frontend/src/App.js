@@ -1,18 +1,17 @@
-import {
-	createBrowserRouter,
-	RouterProvider,
-	// createRoutesFromElements,
-	// Route,
-} from 'react-router-dom';
-import HomePage from './pages/HomePage';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import EditEventPage from './pages/EditEvent';
+import ErrorPage from './pages/Error';
+import EventDetailPage, {
+	loader as eventDetailLoader,
+	action as deleteEventAction,
+} from './pages/EventDetail';
 import EventsPage, { loader as eventsLoader } from './pages/Events';
-import EventDetailPage, { EventDetailLoader, deleteEventAction } from './pages/EventDetail';
-import NewEventPage from './pages/NewEventPage';
-import EditEventPage from './pages/EditEventPage';
-import RootLayout from './pages/RootLayout';
-import EventLayout from './pages/EventLayout';
-import ErrorPage from './pages/ErrorPage';
-import { eventAction } from './components/EventForm';
+import EventsRootLayout from './pages/EventsRoot';
+import HomePage from './pages/Home';
+import NewEventPage from './pages/NewEvent';
+import RootLayout from './pages/Root';
+import { action as manipulateEventAction } from './components/EventForm';
 import NewsletterPage, { action as newsletterAction } from './pages/Newsletter';
 
 const router = createBrowserRouter([
@@ -24,7 +23,7 @@ const router = createBrowserRouter([
 			{ index: true, element: <HomePage /> },
 			{
 				path: 'events',
-				element: <EventLayout />,
+				element: <EventsRootLayout />,
 				children: [
 					{
 						index: true,
@@ -34,7 +33,7 @@ const router = createBrowserRouter([
 					{
 						path: ':eventId',
 						id: 'event-detail',
-						loader: EventDetailLoader,
+						loader: eventDetailLoader,
 						children: [
 							{
 								index: true,
@@ -44,14 +43,14 @@ const router = createBrowserRouter([
 							{
 								path: 'edit',
 								element: <EditEventPage />,
-								action: eventAction,
+								action: manipulateEventAction,
 							},
 						],
 					},
 					{
 						path: 'new',
 						element: <NewEventPage />,
-						action: eventAction,
+						action: manipulateEventAction,
 					},
 				],
 			},
