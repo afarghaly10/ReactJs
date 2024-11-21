@@ -42,6 +42,9 @@ export const action = async ({ request }) => {
 
 	// store in cookie || localStorage
 	localStorage.setItem('token', token);
+  const expiration = new Date();
+  expiration.setHours(expiration.getHours() + 1);
+  localStorage.setItem('expiration', expiration.toISOString());
 	// soon: manage that token
 	return redirect('/');
 };
