@@ -1,5 +1,9 @@
-export const fetchEvents = async () => {
-	const response = await fetch('http://localhost:3000/events');
+export const fetchEvents = async (searchTerm) => {
+
+	let baseUrl = 'http://localhost:3000/events';
+	if (searchTerm) baseUrl += `?search=${searchTerm}`;
+
+  const response = await fetch(baseUrl);
 
 	if (!response.ok) {
 		const error = new Error('An error occurred while fetching the events');
