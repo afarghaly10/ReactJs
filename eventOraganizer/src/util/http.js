@@ -20,22 +20,39 @@ export const fetchEvents = async ({ signal, searchTerm }) => {
 };
 
 export const createNewEvent = async (eventData) => {
-  const response = await fetch(`http://localhost:3000/events`, {
-    method: 'POST',
-    body: JSON.stringify(eventData),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+	const response = await fetch(`http://localhost:3000/events`, {
+		method: 'POST',
+		body: JSON.stringify(eventData),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
 
-  if (!response.ok) {
-    const error = new Error('An error occurred while creating the event');
-    error.code = response.status;
-    error.info = await response.json();
-    throw error;
-  }
+	if (!response.ok) {
+		const error = new Error('An error occurred while creating the event');
+		error.code = response.status;
+		error.info = await response.json();
+		throw error;
+	}
 
-  const { event } = await response.json();
+	const { event } = await response.json();
 
-  return event;
-}
+	return event;
+};
+
+export const fetchSelectableImages = async ({ signal }) => {
+	const response = await fetch(`http://localhost:3000/events/images`, {
+		signal,
+	});
+
+	if (!response.ok) {
+		const error = new Error('An error occurred while fetching the images');
+		error.code = response.status;
+		error.info = await response.json();
+		throw error;
+	}
+
+	const { images } = await response.json();
+
+	return images;
+};
