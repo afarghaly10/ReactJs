@@ -1,3 +1,7 @@
+import { QueryClient } from "@tanstack/react-query";
+
+export const queryClient = new QueryClient();
+
 export const fetchEvents = async ({ signal, searchTerm }) => {
 	console.log('----------------------------');
 	console.log(`searchTerm: >> `, searchTerm);
