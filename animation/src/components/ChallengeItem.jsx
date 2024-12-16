@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useContext } from 'react';
 
 import { ChallengesContext } from '../store/challenges-context.jsx';
@@ -57,14 +57,20 @@ export default function ChallengeItem({
 							</motion.span>
 						</button>
 					</p>
-
-					{isExpanded && (
-						<div>
-							<p className="challenge-item-description">
-								{challenge.description}
-							</p>
-						</div>
-					)}
+					<AnimatePresence>
+						{isExpanded && (
+							<motion.div
+								initial={{ opacity: 0, height: 0 }}
+								animate={{ opacity: 1, height: 'auto' }}
+								exit={{ opacity: 0, height: 0 }}
+								transition={{ duration: 0.5 }}
+							>
+								<p className="challenge-item-description">
+									{challenge.description}
+								</p>
+							</motion.div>
+						)}
+					</AnimatePresence>
 				</div>
 			</article>
 		</motion.li>
